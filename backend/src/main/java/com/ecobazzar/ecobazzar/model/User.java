@@ -32,7 +32,8 @@ public class User {
 	
 	private boolean sellerRequestPending = false;
 
-
+	private boolean adminRequestPending = false;
+	
 	public boolean isSellerRequestPending() {
 		return sellerRequestPending;
 	}
@@ -103,7 +104,13 @@ public class User {
 	}
 
 	
-	
+	public boolean isAdminRequestPending() {
+        return adminRequestPending;
+    }
+
+    public void setAdminRequestPending(boolean adminRequestPending) {
+        this.adminRequestPending = adminRequestPending;
+    }
 	
 
 }
