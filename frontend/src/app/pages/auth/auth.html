@@ -1,0 +1,41 @@
+<div class="container" [class.right-panel-active]="isSignUpMode" id="container">
+  <!-- sign-up -->
+  <div class="form-container sign-up-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <h1>Create Account</h1>
+      <span>Use your email for registration</span>
+      <input type="text" placeholder="Name" formControlName="name" />
+      <input type="email" placeholder="Email" formControlName="email" />
+      <input type="password" placeholder="Password" formControlName="password" />
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- sign-in -->
+  <div class="form-container sign-in-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <h1>Login</h1>
+      <span>or use your account</span>
+      <input type="email" placeholder="Email" formControlName="email" />
+      <input type="password" placeholder="Password" formControlName="password" />
+      <a href="#" class="forgot-pass">Forgot your password?</a>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- overlay -->
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>Nice to see you again</p>
+        <button class="ghost" type="button" (click)="toggleMode()">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>New user? Dive into new shopping era</p>
+        <button class="ghost" type="button" (click)="toggleMode()">Create Account</button>
+      </div>
+    </div>
+  </div>
+</div>

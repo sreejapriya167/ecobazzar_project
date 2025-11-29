@@ -1,0 +1,124 @@
+@use "tailwindcss";
+
+$primary: oklch(65% 0.2 140);
+$primary-light: oklch(75% 0.15 140);
+$primary-dark: oklch(50% 0.25 140);
+$radius: 0.75rem;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply antialiased scroll-smooth;
+  }
+}
+
+/* Dark mode tweaks */
+html.dark {
+  @apply bg-gray-950 text-white;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-white,
+html.dark .bg-gray-100 {
+  @apply bg-gray-950;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+  @apply text-white;
+}
+
+html.dark .text-gray-600 {
+  @apply text-gray-400;
+}
+
+html.dark .text-gray-500 {
+  @apply text-gray-300;
+}
+
+/* smooth color transitions */
+html,
+html * {
+  @apply transition-colors duration-300;
+}
+
+/* Custom EcoBazaar variables */
+:root {
+  --color-moss-500: #3d8b3d;
+  --color-moss-600: #2e7b2e;
+  --color-leaf-400: oklch(75% 0.18 140);
+  --color-earth-100: #f5f8f0;
+  --color-earth-200: #e0e8d8;
+
+  /* global gradient used everywhere */
+  --eco-gradient: linear-gradient(135deg, #029e4f, #0077b6);
+}
+
+/* Global background */
+body {
+  @apply text-gray-900;
+  background: var(--eco-gradient);
+}
+
+.main-gradient-bg {
+  background: var(--eco-gradient);
+}
+
+/* Navbar */
+.eco-toolbar {
+  background: var(--eco-gradient) !important;
+  color: #ffffff !important;
+  border-color: #22c55e !important; /* emerald-500 */
+}
+
+/* Primary CTA button */
+.eco-btn-primary {
+  @apply inline-flex items-center justify-center font-semibold rounded-full;
+  padding: 0.75rem 2.5rem;
+  background: #29a36a;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(41,163,106,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+              background 0.3s ease, color 0.3s ease;
+}
+
+.eco-btn-primary:hover {
+  background: #ffd54f;
+  color: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.eco-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* DASHBOARD FONT TWEAKS */
+.dashboard-hero-title,
+.welcome-heading,
+.dashboard-title,
+h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.dashboard-hero-subtitle,
+.dashboard-subtitle {
+  font-size: 1.1rem;
+}
+
+/* Smaller on mobiles */
+@media (max-width: 768px) {
+  .dashboard-hero-title,
+  .welcome-heading,
+  .dashboard-title,
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .dashboard-hero-subtitle,
+  .dashboard-subtitle {
+    font-size: 1rem;
+  }
+}
