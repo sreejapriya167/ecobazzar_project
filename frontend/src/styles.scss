@@ -1,10 +1,11 @@
 @use "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-$primary: oklch(65% 0.2 140);
-$primary-light: oklch(75% 0.15 140);
-$primary-dark: oklch(50% 0.25 140);
-$radius: 0.75rem;
-
+/* ---------------------------------------------------
+   BASE TYPOGRAPHY & GLOBALS
+--------------------------------------------------- */
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
@@ -12,37 +13,35 @@ $radius: 0.75rem;
   }
 }
 
-/* Dark mode tweaks */
-html.dark {
-  @apply bg-gray-950 text-white;
+/* Smooth transitions */
+html,
+html * {
+  @apply transition-colors duration-300;
 }
 
-html.dark .bg-gray-50,
-html.dark .bg-white,
-html.dark .bg-gray-100 {
-  @apply bg-gray-950;
+/* ---------------------------------------------------
+   DARK MODE ROOT
+--------------------------------------------------- */
+html.dark {
+  @apply bg-gray-950 text-gray-100;
+}
+
+html.dark body {
+  @apply bg-gray-950 text-gray-200;
 }
 
 html.dark .text-gray-900,
 html.dark .text-gray-800 {
-  @apply text-white;
+  @apply text-gray-100;
 }
 
 html.dark .text-gray-600 {
   @apply text-gray-400;
 }
 
-html.dark .text-gray-500 {
-  @apply text-gray-300;
-}
-
-/* smooth color transitions */
-html,
-html * {
-  @apply transition-colors duration-300;
-}
-
-/* Custom EcoBazaar variables */
+/* ---------------------------------------------------
+   ECOBAZAAR VARIABLES
+--------------------------------------------------- */
 :root {
   --color-moss-500: #3d8b3d;
   --color-moss-600: #2e7b2e;
@@ -50,119 +49,402 @@ html * {
   --color-earth-100: #f5f8f0;
   --color-earth-200: #e0e8d8;
 
-  /* UPGRADED PREMIUM ECO GRADIENT */
   --eco-gradient: linear-gradient(
-      135deg,
-      oklch(72% 0.18 140) 0%,     /* light eco green */
-      oklch(62% 0.22 140) 20%,    /* richer moss mid-green */
-      oklch(60% 0.16 210) 60%,    /* ocean teal transition */
-      oklch(55% 0.14 240) 100%    /* premium deep eco blue */
+    135deg,
+    oklch(72% 0.18 140) 0%,
+    oklch(62% 0.22 140) 20%,
+    oklch(60% 0.16 210) 60%,
+    oklch(55% 0.14 240) 100%
   );
 }
 
+/* ---------------------------------------------------
+   GLOBAL BACKGROUND
+--------------------------------------------------- */
 
-/* Global background */
-body {
+/* LIGHT THEME */
+html:not(.dark) body {
   @apply text-gray-900;
-  background: var(--eco-gradient);
+  background: var(--eco-gradient)  ;
 }
 
-.main-gradient-bg {
-  background: var(--eco-gradient);
+/* DARK THEME */
+html.dark body {
+  @apply bg-gray-950   text-gray-200;
+  background: #0f0f0f  ;
 }
 
-/* Navbar */
-.eco-toolbar {
-  background: var(--eco-gradient) !important;
-  color: #ffffff !important;
-  border-color: #22c55e !important; /* emerald-500 */
+/* Remove previous forced backgrounds */
+body {
+  background: none  ;
 }
 
-/* Primary CTA button */
-.eco-btn-primary {
-  @apply inline-flex items-center justify-center font-semibold rounded-full;
-  padding: 0.75rem 2.5rem;
-  background: #29a36a;
-  color: #ffffff;
-  box-shadow: 0 8px 25px rgba(41,163,106,0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-              background 0.3s ease, color 0.3s ease;
+/* Optional: Make specific pages white if needed */
+.page-light {
+  background: #ffffff  ;
 }
 
-.eco-btn-primary:hover {
-  background: #ffd54f;
-  color: #1f2937;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+/* ---------------------------------------------------
+   NAVBAR
+--------------------------------------------------- */
+
+.navbar {
+  @apply bg-white/70 backdrop-blur-xl border-b border-gray-200 shadow-sm;
+}
+html.dark .navbar {
+  @apply bg-gray-900/70 border-gray-700 shadow-lg;
 }
 
-.eco-btn-primary:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+/* ---------------------------------------------------
+   FOOTER
+--------------------------------------------------- */
+
+.footer {
+  @apply bg-white/70 backdrop-blur-xl border-t border-gray-200 shadow-sm;
+}
+html.dark .footer {
+  @apply bg-gray-900/70 border-gray-700 text-gray-300 shadow-lg;
 }
 
-/* DASHBOARD FONT TWEAKS */
-.dashboard-hero-title,
-.welcome-heading,
-.dashboard-title,
-h1 {
-  font-size: 3rem;
-  line-height: 1.1;
+/* ---------------------------------------------------
+   CARDS
+--------------------------------------------------- */
+
+.card {
+  @apply bg-white rounded-3xl shadow-xl border border-gray-200 p-6 transition-all;
+}
+html.dark .card {
+  @apply bg-gray-800 border-gray-700 shadow-2xl;
 }
 
-.dashboard-hero-subtitle,
-.dashboard-subtitle {
-  font-size: 1.1rem;
+/* ---------------------------------------------------
+   BUTTONS
+--------------------------------------------------- */
+
+.btn {
+  @apply px-6 py-3 rounded-xl font-bold transition;
 }
 
-/* Smaller on mobiles */
-@media (max-width: 768px) {
-  .dashboard-hero-title,
-  .welcome-heading,
-  .dashboard-title,
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  .dashboard-hero-subtitle,
-  .dashboard-subtitle {
-    font-size: 1rem;
-  }
+.btn-primary {
+  @apply bg-emerald-600 text-white;
 }
-@keyframes eco-marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.btn-primary:hover {
+  @apply bg-emerald-700;
 }
 
-.animate-marquee {
-  animation: eco-marquee 25s linear infinite;
+html.dark .btn-primary {
+  @apply bg-emerald-500 text-gray-900 hover:bg-emerald-400;
 }
+
+/* ---------------------------------------------------
+   MAT MENU FIXES
+--------------------------------------------------- */
 
 .eco-item {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  padding: 10px 12px !important;
-  border-radius: 8px !important;
-  transition: all 0.2s ease-in-out !important;
+  font-size: 14px  ;
+  font-weight: 500  ;
+  padding: 10px 12px  ;
+  border-radius: 8px  ;
+  transition: all 0.2s ease-in-out  ;
 }
 
 .eco-item:hover {
-  background: rgba(16, 185, 129, 0.12) !important; /* Emerald tint */
+  background: rgba(16, 185, 129, 0.12)  ;
   transform: translateX(4px);
 }
 
 .mat-menu-panel {
-  background: #ffffff !important;        /* IMPORTANT: Removes transparency */
+  background: #ffffff  ;
+  border-radius: 12px  ;
+  padding: 0  ;
+  overflow: hidden  ;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15)  ;
+  z-index: 999999  ;
+}
 
-  border-radius: 12px !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
-
-  z-index: 999999 !important;           /* FIXES overlap forever */
+html.dark .mat-menu-panel {
+  background: #1f2937  ;
+  color: white  ;
 }
 
 .cdk-overlay-container {
-  z-index: 999999 !important;
+  z-index: 999999  ;
+}
+/* PAGE BACKGROUND SYSTEM */
+.page-wrapper {
+  background: linear-gradient(to bottom right,
+      #ecfdf5,
+      #d1fae5,
+      #ccfbf1
+  );
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+html.dark .page-wrapper {
+  background: #0f172a !important;   /* Slate-950 */
+}
+
+/* Floating blobs */
+.ambient-blur div {
+  transition: opacity .4s ease;
+}
+
+html.dark .ambient-blur div {
+  opacity: 0.07; /* subtle glow, not bright */
+}
+/* ------------------------------
+   FOOTER — LIGHT MODE
+------------------------------- */
+
+.eco-footer {
+  background: linear-gradient(
+    to top,
+    #ecfdf5,
+    #d1fae5,
+    #ccfbf1
+  );
+  border-top: 1px solid #a7f3d0;
+  color: #1f2937;
+  transition: background 0.4s ease, color 0.3s ease, border-color .3s;
+}
+
+/* Light mode blobs */
+.eco-footer .footer-blob {
+  opacity: 0.45;
+}
+
+
+/* ------------------------------
+   FOOTER — DARK MODE
+------------------------------- */
+
+html.dark .eco-footer {
+  background: #0f172a;                     /* slate-950 */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #e2e8f0;                           /* gray-200 */
+}
+
+/* Subtle glowing blobs */
+html.dark .eco-footer .footer-blob {
+  background-color: rgba(56,189,248,0.08) !important; /* soft cyan glow */
+  opacity: 0.2;
+}
+
+/* Dark text overrides */
+html.dark .eco-footer p {
+  color: #cbd5e1 !important; /* gray-300 */
+}
+
+html.dark .eco-footer span {
+  color: #4ade80 !important; /* emerald-400 */
+}
+
+/* Stats cards in footer */
+html.dark .eco-footer .card {
+  background: #1e293b !important;        /* slate-800 */
+  border-color: #334155 !important;      /* slate-700 */
+  color: #e2e8f0 !important;
+}
+
+/* Heading text neon glow */
+html.dark .eco-footer h2 {
+  background: linear-gradient(90deg,#6ee7b7,#3b82f6);
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(94,234,212,0.25));
+}
+/* ---------- HERO DOTS & ORBS & DARK MODE ---------- */
+
+/* smaller floating orbs (photo background) — makes them less dominant */
+.absolute.top-10.-left-20.w-96.h-96,
+.absolute.bottom-0.right-0.w-80.h-80,
+.absolute.top-1\/2.left-1\/2.-translate-x-1\/2.-translate-y-1\/2.w-72.h-72 {
+  /* optional keep — but we'll add specific smaller variants for hero area below */
+}
+
+/* hero specific: reduce orb sizes on hero to be less dominant */
+.hero-orb-1 { @apply absolute top-10 -left-8 w-48 h-48 rounded-full blur-3xl; background-color: rgba(34,197,94,0.12); }
+.hero-orb-2 { @apply absolute bottom-6 right-6 w-40 h-40 rounded-full blur-3xl; background-color: rgba(20,184,166,0.10); }
+.hero-orb-3 { @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full blur-3xl; background-color: rgba(163,230,53,0.06); }
+
+/* hero dots */
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.85); /* dark navy in light mode */
+  border: 2px solid rgba(255,255,255,0.9);
+  opacity: 0.85;
+  transform: translateY(0);
+  transition: all 220ms cubic-bezier(.2,.9,.2,1);
+  box-shadow: 0 2px 6px rgba(10,10,10,0.08);
+  cursor: pointer;
+}
+
+/* active dot — larger and colored */
+.hero-dot.active {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(90deg, #10b981, #06b6d4); /* emerald -> teal */
+  border: 0;
+  box-shadow: 0 6px 20px rgba(16,185,129,0.25);
+  transform: translateY(-2px);
+}
+
+/* keyboard focus */
+.hero-dot:focus {
+  outline: 3px solid rgba(16,185,129,0.18);
+  outline-offset: 2px;
+}
+
+/* make the default tiny button look clean on mobile */
+@media (max-width: 640px) {
+  .hero-dot { width: 8px; height: 8px; }
+  .hero-dot.active { width: 14px; height: 14px; }
+}
+
+/* ===================== DARK MODE ===================== */
+/* When html has .dark class we change dot / orb colors + hero text contrast */
+
+html.dark {
+  --hero-bg: #0b1220;
+  --hero-card: #111827;
+  --muted-text: #9ca3af;
+  --primary-glow: rgba(6,95,70,0.12);
+}
+
+/* hero area background overlay when dark */
+html.dark .hero-overlay,
+html.dark .hero-card {
+  background: linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,6,23,0.65));
+}
+
+/* smaller orb colors for dark */
+html.dark .hero-orb-1 { background-color: rgba(16,185,129,0.06) !important; }
+html.dark .hero-orb-2 { background-color: rgba(6,182,212,0.05) !important; }
+html.dark .hero-orb-3 { background-color: rgba(34,197,94,0.04) !important; }
+
+/* dots: lighter border, transparent fill in dark, active uses neon */
+html.dark .hero-dot {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+html.dark .hero-dot.active {
+  background: linear-gradient(90deg,#20c997,#06b6d4);
+  box-shadow: 0 8px 30px rgba(6,182,212,0.16);
+}
+
+/* hero text color changes in dark */
+html.dark .hero-title,
+html.dark .hero-subtitle {
+  color: #e6eef4 !important;
+}
+
+/* small accessibility tweak - ensure dots are clickable area */
+.hero-dot { padding: 4px; }
+
+/* Assuming a light page background; adjust if your page is dark */
+body {
+  background: #ffffff; /* Or whatever your page bg is */
+  font-family: 'Arial', sans-serif; /* Add a fallback font-family for better readability */
+}
+
+/* H1 styling - ensure good contrast */
+form h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f9d62; /* Green - should be visible on light bg */
+  margin-bottom: 10px;
+}
+
+/* Span styling */
+form span {
+  font-size: 1.2rem;
+  color: #4b5563; /* Gray - visible on light bg */
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ----------- BLUR GLASS INPUTS ----------- */
+form input {
+  width: 100%;
+  padding: 18px 22px;
+  font-size: 1rem;
+  color: #000000; /* Explicit black text for default state */
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  margin-bottom: 25px;
+  transition: all .3s ease;
+}
+
+/* INPUT FOCUS EFFECT - Fix: Change text color to white for contrast on gray bg */
+form input:focus {
+  outline: none;
+  background: rgba(133, 131, 131, 0.75);
+  border-color: #22c55e;
+  box-shadow: 0 0 10px rgba(16,185,129,0.2);
+  color: #ffffff; /* White text on gray bg for visibility */
+}
+
+/* -------- BUTTON STYLING -------- */
+form button {
+  padding: 16px 40px;
+  font-size: 1rem;
+  border-radius: 40px;
+  margin-top: 10px;
+  letter-spacing: .5px;
+  background: #22a364;
+  color: white; /* Already good */
+  border: none;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+form button:hover {
+  background: #1b8a55;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,122,72,0.25);
+}
+
+/* Forgot Password */
+.forgot-pass {
+  display: block;
+  margin: 10px 0 20px 0;
+  font-size: 1.1rem;
+  color: #9ca3af;
+}
+.forgot-pass:hover {
+  color: #10b981;
+}
+
+/* ----------- OVERLAY SIDE TEXT ----------- */
+.overlay-panel h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.overlay-panel p {
+  font-size: 1.25rem;
+}.blur-input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  color: #333; /* Makes text dark gray (visible) */
+  font-size: 14px;
+}
+
+.blur-input:focus {
+  background-color: #fff;
+  color: #333; /* Ensures text stays visible when typing */
+  outline: none;
+  border: 1px solid #27ae60; /* Matches your green border */
+}
+
+.blur-input::placeholder {
+  color: #999; /* Ensures placeholder is visible */
 }

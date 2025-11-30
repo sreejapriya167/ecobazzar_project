@@ -15,11 +15,15 @@
 
       <!-- Normal User -->
       <ng-container *ngIf="auth.isUser() && !auth.isSeller() && !auth.isAdmin()">
-        <a routerLink="/products" routerLinkActive="active-link"
-           class="nav-link">Shop</a>
+       <a routerLink="/products"
+       routerLinkActive="text-emerald-600 font-bold active-link"
+       class="nav-link">
+       Shop</a>
 
-        <a routerLink="/cart" routerLinkActive="active-link"
-           class="nav-link relative">
+       <a routerLink="/cart"
+       routerLinkActive="text-emerald-600 font-bold active-link"
+       class="nav-link relative">
+
           Cart
           <span *ngIf="cartCount > 0"
                 class="absolute -top-3 -right-6 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg">
@@ -28,8 +32,8 @@
         </a>
 
         <a routerLink="/dashboard"
-           class="text-emerald-700 hover:text-emerald-900 font-bold text-lg transition-all duration-300">
-          My Impact
+       routerLinkActive="text-emerald-600 font-bold active-link"
+       class="nav-link"> My Impact
         </a>
       </ng-container>
 
@@ -43,11 +47,20 @@
       <!-- Admin -->
       <ng-container *ngIf="auth.isAdmin()">
         <a routerLink="/admin"
-           class="px-6 py-2 rounded-full border border-emerald-500 text-emerald-700 font-bold bg-white/40 backdrop-blur-md">
+           class="px-6 py-2 rounded-full border border-emerald-500 text-emerald-700 font-bold card backdrop-blur-md">
           Admin Panel
         </a>
       </ng-container>
     </nav>
+
+    <button
+  (click)="toggleTheme()"
+  class="p-3 rounded-full bg-white-200 dark:bg-gray-700 shadow-md hover:scale-110 transition"
+>
+  <span *ngIf="isDark">🌙</span>
+  <span *ngIf="!isDark">☀️</span>
+</button>
+
 
     <!-- Right Auth Buttons -->
     <div class="flex items-center gap-6">
@@ -92,7 +105,10 @@
 
 
 <!-- Page Content -->
-<div class="pt-15 min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
+<div class="page-wrapper min-h-screen 
+            bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 
+            dark:bg-gray-950 dark:text-gray-100 
+            relative overflow-hidden py-12 px-6">
   <div class="absolute inset-0 -z-10 pointer-events-none">
     <div class="absolute top-10 -left-20 w-96 h-96 bg-emerald-400/25 rounded-full blur-3xl animate-pulse"></div>
     <div class="absolute bottom-0 right-0 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>

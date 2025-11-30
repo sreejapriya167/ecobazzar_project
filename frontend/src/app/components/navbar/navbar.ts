@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgIf } from '@angular/common';
 import { Subject, filter, takeUntil } from 'rxjs';
-
+import { ThemeService } from '../../services/theme.service';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart';
 
@@ -24,7 +24,7 @@ import { CartService } from '../../services/cart';
     NgIf
   ],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrl: './navbar.scss',
 })
 export class Navbar implements OnInit, OnDestroy {
   auth = inject(AuthService);
@@ -80,6 +80,16 @@ export class Navbar implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+   constructor(private theme: ThemeService) {}
+
+  toggleTheme() {
+    this.theme.toggleTheme();
+  }
+
+  get isDark() {
+    return this.theme.isDark();
   }
   
 }

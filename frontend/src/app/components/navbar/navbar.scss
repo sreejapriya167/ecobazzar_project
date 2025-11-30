@@ -1,17 +1,11 @@
-.eco-auth-btn { border-width: 2px !important; border-color: #5d8775 !important; color: #5d8775 !important; background-color: transparent !important; border-radius: 9999px !important; padding: 0.5rem 1.5rem !important; font-weight: 600 !important; transition: background-color 0.2s ease, color 0.2s ease; } .eco-auth-btn:hover { background-color: #059669 !important; /* green */ }
-
+@use "tailwindcss";
 .eco-logo {
   font-family: 'Inter', sans-serif;
   font-size: 2.2rem;
   font-weight: 300;
   letter-spacing: -0.3px;
 
-  background: linear-gradient(
-    95deg,
-    #4ade80 0%,   /* soft eco green */
-    #60a5fa 100%  /* soft sky blue */
-  );
-
+  background: #059669;
   -webkit-background-clip: text;
   color: transparent;
 
@@ -19,13 +13,76 @@
   line-height: 1.1;
 }
 
-.eco-toolbar {
-  background: transparent !important;
-  backdrop-filter: blur(20px);    /* Soft glass effect */
-  -webkit-backdrop-filter: blur(20px);
-  border-color: transparent !important;
-  color: #0f172a !important;       /* Dark text for visibility */
+/* DARK MODE LOGO - slightly brighter */
+html.dark .eco-logo {
+  background: linear-gradient(95deg, #86efac 0%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  color: transparent;
 }
+
+/* ---------------------------------------------------
+   NAVBAR / TOOLBAR (GLASS EFFECT)
+--------------------------------------------------- */
+.eco-navbar {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+html.dark .eco-navbar {
+  background: rgba(17,24,39,0.8); /* black glass */
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: #e5e7eb;
+}
+
+/* ---------------------------------------------------
+   AUTH BUTTONS
+--------------------------------------------------- */
+.eco-auth-btn {
+  border-width: 2px;
+  border-color: #5d8775;
+  color: #5d8775;
+
+  background-color: transparent;
+  border-radius: 9999px;
+
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.eco-auth-btn:hover {
+  background-color: #059669; /* emerald green */
+  color: white;
+}
+
+/* DARK MODE BUTTON */
+html.dark .eco-auth-btn {
+  border-color: #a7f3d0; /* emerald-200 */
+  color: #a7f3d0;
+}
+
+html.dark .eco-auth-btn:hover {
+  background-color: #34d399; /* emerald-400 */
+  color: #111827; /* dark text */
+}
+html.dark canvas {
+  background-color: #1e293b !important;
+}
+.card {
+  @apply bg-white shadow-xl border border-gray-200;
+}
+
+html.dark .card {
+  background: #1e2632 !important;
+  border-color: #334155 !important;
+  color:#1a222e !important;
+}
+
+/* ---------------------------------------------------
+   OVERLAY FIX
+--------------------------------------------------- */
 .cdk-overlay-container {
-  z-index: 99999 !important;
+  z-index: 99999;
 }

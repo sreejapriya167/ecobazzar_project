@@ -4,10 +4,10 @@
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <h1>Create Account</h1>
       <span>Use your email for registration</span>
-      <input type="text" placeholder="Name" formControlName="name" />
-      <input type="email" placeholder="Email" formControlName="email" />
-      <input type="password" placeholder="Password" formControlName="password" />
-      <button type="submit">Register</button>
+    <input type="text" placeholder="Name" formControlName="name" class="blur-input" />
+<input type="email" placeholder="Email" formControlName="email" class="blur-input" />
+<input type="password" placeholder="Password" formControlName="password" class="blur-input" />
+ <button type="submit">Register</button>
     </form>
   </div>
 
@@ -16,9 +16,9 @@
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <h1>Login</h1>
       <span>or use your account</span>
-      <input type="email" placeholder="Email" formControlName="email" />
-      <input type="password" placeholder="Password" formControlName="password" />
-      <a href="#" class="forgot-pass">Forgot your password?</a>
+    <input type="email" placeholder="Email" formControlName="email" class="blur-input" />
+<input type="password" placeholder="Password" formControlName="password" class="blur-input" />
+ <a href="#" class="forgot-pass">Forgot your password?</a>
       <button type="submit">Login</button>
     </form>
   </div>

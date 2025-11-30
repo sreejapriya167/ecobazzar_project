@@ -1,115 +1,136 @@
 <div class="flex justify-center mt-10 w-full">
-  <div class="w-full max-w-4xl bg-white/70 backdrop-blur-xl 
-              p-10 rounded-3xl shadow-2xl border border-emerald-100">
+  <div
+    class="w-full max-w-4xl card/70 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-emerald-100"
+  >
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+      <!-- Product Name + Description -->
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <!-- Name -->
+        <div class="space-y-2">
+          <label class="block text-base font-medium text-gray-700">
+            Product Name
+          </label>
+          <input
+            formControlName="name"
+            placeholder="Organic Cotton T-Shirt"
+            class="w-full px-4 py-3 text-base rounded-xl border border-gray-300 bg-white
+                   shadow-sm placeholder-gray-500
+                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
+          />
+        </div>
 
+        <!-- Description -->
+        <div class="space-y-2">
+          <label >
+            Description (Optional)
+          </label>
+          <textarea
+  formControlName="details"
+  rows="4"
+  placeholder="Tell customers why this product is planet-friendly..."
+  class="w-full px-4 pt-6 pb-3 text-base rounded-xl border border-gray-300 bg-white
+         text-gray-800 shadow-sm resize-none placeholder-gray-500
+         focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
+></textarea>
 
-<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-10">
+        </div>
+      </div>
 
-  <!-- Product Name + Description -->
-  <div class="grid md:grid-cols-2 gap-6">
+      <!-- Price + Carbon Impact -->
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <!-- Price -->
+        <div class="space-y-2">
+          <label class="block text-base font-medium text-gray-700">
+            Price (₹)
+          </label>
+          <input
+            type="number"
+            formControlName="price"
+            min="0"
+            placeholder="0"
+            class="w-full px-4 py-3 text-base rounded-xl border border-gray-300 bg-white
+                   shadow-sm placeholder-gray-500
+                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
+          />
+        </div>
 
-    <!-- Name -->
-    <div>
-      <label class="block text-base font-medium text-gray-700 mb-1">
-        Product Name <span class="text-red-500">*</span>
-      </label>
-      <input formControlName="name"
-             placeholder="Organic Cotton T-Shirt"
-             class="w-full px-4 py-3 text-base rounded-xl border border-gray-300
-                    bg-white/60 backdrop-blur-md shadow-sm
-                    placeholder-gray-500
-                    focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30" />
-    </div>
+        <!-- Carbon Impact -->
+        <div class="space-y-2">
+          <label class="block text-base font-medium text-gray-700">
+            Carbon Impact (kg CO₂e)
+          </label>
+          <input
+            type="number"
+            formControlName="carbonImpact"
+            min="0"
+            step="0.01"
+            placeholder="0"
+            class="w-full px-4 py-3 text-base rounded-xl border border-gray-300 bg-white
+                   shadow-sm placeholder-gray-500
+                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
+          />
+        </div>
+      </div>
 
-    <!-- Description -->
-    <div>
-      <label class="block text-base font-medium text-gray-700 mb-1">
-        Description <span class="text-gray-500 text-xs">(optional)</span>
-      </label>
-      <textarea formControlName="details" rows="4"
-                placeholder="Tell customers why this product is planet-friendly..."
-                class="w-full px-4 py-3 text-base rounded-xl border border-gray-300
-                       bg-white/60 backdrop-blur-md shadow-sm
-                       placeholder-gray-500 resize-none
-                       focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"></textarea>
-    </div>
+      <!-- Image + Eco Certification -->
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <!-- Image Upload -->
+        <div class="space-y-2">
+          <label class="block text-base font-medium text-gray-700">
+            Product Image
+          </label>
 
-  </div>
+          <input
+            type="file"
+            (change)="onFileChange($event)"
+            class="block w-full text-sm text-gray-600
+                   file:mr-4 file:py-2 file:px-5 file:rounded-xl file:border-0
+                   file:bg-emerald-600 file:text-white hover:file:bg-emerald-700"
+          />
 
-  <!-- Price + Carbon -->
-  <div class="grid md:grid-cols-2 gap-6">
+          <img
+            *ngIf="previewUrl"
+            [src]="previewUrl"
+            class="mt-3 max-h-52 rounded-xl border shadow-md"
+          />
+        </div>
 
-    <div class="relative -mt-3">
-      <label class="block text-base font-medium text-gray-700 mb-1">
-        Price (₹) <span class="text-red-500">*</span>
-      </label>
-      <input type="number" formControlName="price" min="0"
-             class="w-full px-4 py-3 text-base rounded-xl border border-gray-300
-                    bg-white/60 backdrop-blur-md shadow-sm
-                    focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30" />
-    </div>
+        <!-- Eco Certification (single line, compact) -->
+        <div
+          class="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-50/70 border border-emerald-200"
+        >
+          <input
+            type="checkbox"
+            id="ecoCert"
+            formControlName="ecoCertified"
+            class="w-3.5 h-3.5 accent-emerald-600"
+          />
+          <label for="ecoCert" class="text-sm font-medium text-green-800">
+            Request Official Eco Certification
+          </label>
+        </div>
+      </div>
 
-    <div>
-      <label class="block text-base font-medium text-gray-700 mb-1">
-        Carbon Impact (kg CO₂e)
-      </label>
-      <input type="number" formControlName="carbonImpact"
-             min="0" step="0.01"
-             class="w-full px-4 py-3 text-base rounded-xl border border-gray-300
-                    bg-white/60 backdrop-blur-md shadow-sm
-                    focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30" />
-    </div>
+      <!-- Buttons (smaller) -->
+      <div class="flex justify-end gap-3 pt-2">
+        <button
+          type="button"
+          (click)="router.navigate(['/seller/dashboard'])"
+          class="btn-small px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300
+                 hover:bg-gray-100 transition"
+        >
+          Cancel
+        </button>
 
-  </div>
-
-  <!-- Image + Certification -->
-  <div class="grid md:grid-cols-2 gap-6">
-
-    <!-- Image Upload -->
-    <div>
-      <label class="block text-base font-medium text-gray-700 mb-1">
-        Product Image
-      </label>
-      <input type="file"
-             (change)="onFileChange($event)"
-             class="block w-full text-sm text-gray-600
-                    file:mr-4 file:py-2 file:px-5 file:rounded-xl file:border-0
-                    file:bg-emerald-600 file:text-white hover:file:bg-emerald-700" />
-
-      <img *ngIf="previewUrl" [src]="previewUrl"
-           class="mt-4 max-h-52 rounded-xl border shadow-md" />
-    </div>
-
-    <!-- Eco Certification -->
-    <div class="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
-      <input type="checkbox" id="ecoCert" formControlName="ecoCertified"
-             class="w-5 h-5 text-emerald-600">
-      <label for="ecoCert" class="text-base font-medium text-green-800">
-        Request Official Eco Certification
-      </label>
-    </div>
-
-  </div>
-
-  <!-- Buttons -->
-  <div class="flex justify-end gap-4 pt-4">
-
-    <button type="button"
-            (click)="router.navigate(['/seller/dashboard'])"
-            class="px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-300
-                   hover:bg-gray-100 transition">
-      Cancel
-    </button>
-
-    <button type="submit"
-            class="px-6 py-2.5 text-sm font-semibold rounded-lg
-                   bg-emerald-600 text-white
-                   hover:bg-emerald-700 shadow-md transition">
-      {{ editing ? 'Update Product' : 'Create Product' }}
-    </button>
-
-  </div>
-
-</form>
+        <button
+          type="submit"
+          class="btn-small px-4 py-1.5 text-sm font-semibold rounded-lg
+                 bg-emerald-600 text-white
+                 hover:bg-emerald-700 shadow-md transition"
+        >
+          {{ editing ? "Update Product" : "Create Product" }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -1,11 +1,15 @@
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
+<div class="page-wrapper min-h-screen 
+            bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 
+            dark:bg-gray-950 dark:text-gray-100 
+            relative overflow-hidden py-12 px-6">
 
-  <!-- BACKGROUND FLOATING ORBS -->
-  <div class="absolute inset-0 -z-10 pointer-events-none">
-    <div class="absolute top-10 -left-20 w-96 h-96 bg-emerald-400/25 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-lime-400/15 rounded-full blur-3xl animate-pulse delay-500"></div>
-  </div>
+ <!-- BACKGROUND FLOATING ORBS -->
+<div class="absolute inset-0 -z-10 pointer-events-none">
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="hero-orb-3"></div>
+</div>
+
 
   <!-- HERO SLIDER -->
 <div class="relative w-full h-[300px] md:h-[320px] lg:h-[400px] mt-0 pt-0 overflow-hidden">
@@ -21,14 +25,16 @@
     </div>
 
     <!-- Dots -->
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-      <button *ngFor="let s of slides; let i = index"
-              (click)="currentSlide = i"
-              class="w-3 h-3 rounded-full transition-all"
-              [class.bg-white]="i === currentSlide"
-              [class.bg-white/40]="i !== currentSlide">
-      </button>
-    </div>
+  <!-- Dots -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+  <button *ngFor="let s of slides; let i = index"
+          (click)="currentSlide = i"
+          class="hero-dot"
+          [class.active]="i === currentSlide"
+          aria-label="Go to slide {{ i + 1 }}">
+  </button>
+</div>
+
 
   </div>
 

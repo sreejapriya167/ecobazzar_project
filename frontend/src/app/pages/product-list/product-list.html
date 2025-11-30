@@ -1,44 +1,63 @@
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 
-                relative overflow-hidden py-12 px-6">
+<div class="min-h-screen 
+            bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 
+            relative overflow-hidden py-12 px-6">
 
   <!-- Floating Eco Orbs -->
-  <div class="absolute inset-0 -z-10 pointer-events-none">
-    <div class="absolute top-10 -left-20 w-96 h-96 bg-emerald-400/25 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-lime-400/15 rounded-full blur-3xl animate-pulse delay-500"></div>
-  </div>
+<div class="absolute inset-0 -z-10 pointer-events-none">
+  <div class="absolute top-10 -left-20 w-72 h-72 
+              bg-emerald-400/20 dark:bg-emerald-700/10 
+              rounded-full blur-3xl animate-pulse"></div>
+
+  <div class="absolute bottom-0 right-0 w-64 h-64 
+              bg-teal-500/20 dark:bg-teal-700/10 
+              rounded-full blur-3xl animate-pulse delay-1000"></div>
+
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56
+              bg-lime-400/15 dark:bg-lime-700/10 
+              rounded-full blur-3xl animate-pulse delay-500"></div>
+</div>
+>
 
   <div class="max-w-7xl mx-auto">
 
     <!-- Hero Header -->
     <div class="text-center mb-16">
-      <h1 class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 
-                   bg-clip-text text-transparent leading-tight">
-        EcoBazaar Marketplace
-      </h1>
-      <p class="mt-4 text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-light">
-        Shop consciously. Every purchase counts for the planet.
-      </p>
+     <h1 class="text-4xl md:text-5xl font-extrabold 
+           text-emerald-600 leading-tight">
+  EcoBazaar Marketplace
+</h1>
+
+<p class="mt-3 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto font-light">
+  Shop consciously. Every purchase counts for the planet.
+</p>
+
     </div>
 
     <!-- Search + Filter Bar -->
-    <div class="mb-12 bg-white/80 backdrop-blur-xl rounded-3xl 
+    <div class="mb-12 card backdrop-blur-xl rounded-3xl 
                   shadow-2xl border border-emerald-100 p-6 
                   flex flex-col md:flex-row gap-6 items-center justify-between">
 
-      <div class="relative flex-1 max-w-2xl">
-        <input
-          type="text"
-          placeholder="Search products..."
-          [(ngModel)]="searchText"
-          (ngModelChange)="onSearchChange($event)"
-          class="w-full pl-16 pr-8 py-5 text-lg rounded-2xl border-2 
-                 border-gray-200 bg-white text-gray-900
-                 placeholder-gray-500
-                 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30
-                 outline-none transition-all duration-300" />
+<div class="relative flex-1 max-w-2xl">
+  <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400"
+       fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+  </svg>
 
-        <svg class="absolute left-6 top-1/2 -translate-y-1/2 w-7 h-7 text-emerald-600" 
+  <input
+    type="text"
+    placeholder="Search products..."
+    [(ngModel)]="searchText"
+    (ngModelChange)="onSearchChange($event)"
+    class="appearance-none w-full pl-14 pr-6 py-3 text-base rounded-2xl 
+           border-2 border-gray-200 bg-white dark:bg-gray-800 dark:text-gray-100
+           placeholder-gray-500 dark:placeholder-gray-400
+           focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30
+           outline-none transition" />
+
+
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600">
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -49,8 +68,8 @@
         <input type="checkbox"
                [(ngModel)]="ecoOnly"
                (change)="onEcoToggle()"
-               class="w-7 h-7 rounded-lg text-emerald-600 focus:ring-emerald-500 accent-emerald-600" />
-        <span class="text-lg font-semibold text-gray-800">
+               class="w-7 h-5 rounded-lg text-emerald-600 focus:ring-emerald-500 accent-emerald-600" />
+        <span class="text-base font-medium text-gray-800">
           Only Eco-Certified
         </span>
       </label>
@@ -81,7 +100,7 @@
       <a *ngFor="let p of filtered; trackBy: trackById"
          [routerLink]="['/products', p.id]"
          class="group relative block rounded-3xl overflow-hidden 
-                bg-white/90 backdrop-blur-xl 
+                card backdrop-blur-xl 
                 border border-emerald-100
                 shadow-xl hover:shadow-2xl 
                 transform hover:-translate-y-4 transition-all duration-500">
@@ -95,7 +114,7 @@
         </div>
 
         <!-- Image Container -->
-        <div class="relative h-64 overflow-hidden">
+        <div class="relative h-48 overflow-hidden">
           <img [src]="p.imageUrl || 'assets/placeholder.png'"
                [alt]="p.name"
                loading="lazy"
@@ -108,26 +127,24 @@
 
         <!-- Content -->
         <div class="p-6">
-          <h3 class="text-xl font-extrabold text-gray-900 
-                     group-hover:text-emerald-600 
-                     transition-colors line-clamp-2 min-h-[3.5rem]">
-            {{ p.name }}
+          <h3 class="text-lg font-bold text-gray-900 group-hover:text-emerald-600
+           transition line-clamp-2 min-h-[2.8rem]">
+             {{ p.name }}
           </h3>
 
           <div class="mt-4 flex items-center justify-between">
-            <p class="text-3xl font-bold text-emerald-600">
+            <p class="text-2xl font-bold text-emerald-600">
               ₹{{ p.price | number:'1.0-0' }}
             </p>
 
             <div *ngIf="p.carbonImpact != null"
-                 class="text-sm font-medium text-gray-600 
-                        flex items-center gap-1 bg-gray-100 
-                        px-3 py-1 rounded-full">
+                 class="text-xs font-medium bg-gray-100 px-2 py-1 rounded-full">
+
               <span class="text-xs">CO₂</span> {{ p.carbonImpact }} kg
             </div>
           </div>
 
-          <p class="mt-3 text-sm text-gray-600 line-clamp-2">
+          <p class="mt-2 text-sm text-gray-600 line-clamp-2">
             {{ p.details || 'Sustainable & responsibly made' }}
           </p>
         </div>
@@ -142,7 +159,6 @@
     <!-- Empty State -->
     <div *ngIf="!loading && !error && filtered.length === 0"
          class="text-center py-32">
-      <div class="text-9xl mb-8 opacity-20">Magnifying Glass</div>
       <p class="text-3xl font-bold text-gray-600 mb-4">
         No products found
       </p>
