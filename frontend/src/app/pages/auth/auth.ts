@@ -46,7 +46,7 @@ export class AuthComponent {
 
     this.authService.login({ email, password }).subscribe({
       next: () => {
-        alert('Login successful!');
+       
         this.router.navigate(['/']); // Redirect to home or dashboard
       },
       error: (err) => {

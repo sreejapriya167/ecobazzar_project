@@ -50,9 +50,16 @@ html * {
   --color-earth-100: #f5f8f0;
   --color-earth-200: #e0e8d8;
 
-  /* global gradient used everywhere */
-  --eco-gradient: linear-gradient(135deg, #029e4f, #0077b6);
+  /* UPGRADED PREMIUM ECO GRADIENT */
+  --eco-gradient: linear-gradient(
+      135deg,
+      oklch(72% 0.18 140) 0%,     /* light eco green */
+      oklch(62% 0.22 140) 20%,    /* richer moss mid-green */
+      oklch(60% 0.16 210) 60%,    /* ocean teal transition */
+      oklch(55% 0.14 240) 100%    /* premium deep eco blue */
+  );
 }
+
 
 /* Global background */
 body {
@@ -121,4 +128,41 @@ h1 {
   .dashboard-subtitle {
     font-size: 1rem;
   }
+}
+@keyframes eco-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: eco-marquee 25s linear infinite;
+}
+
+.eco-item {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 10px 12px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.eco-item:hover {
+  background: rgba(16, 185, 129, 0.12) !important; /* Emerald tint */
+  transform: translateX(4px);
+}
+
+.mat-menu-panel {
+  background: #ffffff !important;        /* IMPORTANT: Removes transparency */
+
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+
+  z-index: 999999 !important;           /* FIXES overlap forever */
+}
+
+.cdk-overlay-container {
+  z-index: 999999 !important;
 }

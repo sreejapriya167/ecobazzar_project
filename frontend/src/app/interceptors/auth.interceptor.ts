@@ -8,7 +8,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const toastr = inject(ToastrService);
 
-  const token = localStorage.getItem('token') || '';
+  const token = localStorage.getItem('token'); // ✅ don't fallback to empty string
   const skipAuthFor = ['api.cloudinary.com'];
   const shouldSkip = skipAuthFor.some(d => req.url.includes(d));
 
@@ -20,8 +20,12 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err: HttpErrorResponse) => {
       if (err.status === 401) {
         toastr.error('Your session has expired. Please login again.', 'Unauthorized');
-        localStorage.clear();
-        router.navigate(['/login']);
+        // ❌ Don't clear token immediately if request was public or token just missing
+        // ✅ Clear only if token was actually used
+        if (token) {
+          localStorage.clear();
+          router.navigate(['/login']);
+        }
       } else if (err.status === 403) {
         toastr.error('You are not allowed to access this resource.', 'Forbidden');
       }

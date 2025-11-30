@@ -1,0 +1,31 @@
+.eco-auth-btn { border-width: 2px !important; border-color: #5d8775 !important; color: #5d8775 !important; background-color: transparent !important; border-radius: 9999px !important; padding: 0.5rem 1.5rem !important; font-weight: 600 !important; transition: background-color 0.2s ease, color 0.2s ease; } .eco-auth-btn:hover { background-color: #059669 !important; /* green */ }
+
+.eco-logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+
+  background: linear-gradient(
+    95deg,
+    #4ade80 0%,   /* soft eco green */
+    #60a5fa 100%  /* soft sky blue */
+  );
+
+  -webkit-background-clip: text;
+  color: transparent;
+
+  display: inline-block;
+  line-height: 1.1;
+}
+
+.eco-toolbar {
+  background: transparent !important;
+  backdrop-filter: blur(20px);    /* Soft glass effect */
+  -webkit-backdrop-filter: blur(20px);
+  border-color: transparent !important;
+  color: #0f172a !important;       /* Dark text for visibility */
+}
+.cdk-overlay-container {
+  z-index: 99999 !important;
+}

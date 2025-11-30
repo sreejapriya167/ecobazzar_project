@@ -81,4 +81,5 @@ export class Navbar implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+  
 }
