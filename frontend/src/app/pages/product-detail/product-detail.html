@@ -59,9 +59,10 @@
 
           <div *ngIf="product.carbonImpact != null"
                class="flex items-center gap-3 card-100 px-5 py-3 rounded-xl border border-gray-300">
-            <span class="text-xl">CO₂ </span>
+            <span class="text-xl font-bold text-emerald-600">CO₂ </span>
             <div>
-              <p class="text-xl font-semibold">{{ product.carbonImpact }} kg</p>
+              <p class="text-xl font-bold text-emerald-600">{{ product.carbonImpact }} kg</p>
+
               <p class="text-xs text-gray-600">per unit</p>
             </div>
           </div>
@@ -85,8 +86,13 @@
         <div class="flex items-center gap-6">
           <div class="flex items-center gap-4">
             <label class="font-medium text-gray-700">Qty:</label>
-            <input type="number" [(ngModel)]="qty" min="1" max="99"
-                   class="w-20 px-4 py-2 text-lg text-center rounded-lg border border-gray-300 focus:ring-emerald-500 focus:border-emerald-500" />
+            <input type="number"
+       [(ngModel)]="qty"
+       min="1"
+       max="99"
+       class="text-emerald-600 font-bold bg-white border border-gray-300 px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+       [disabled]="added" />
+
           </div>
 
           <button (click)="addToCart()"
