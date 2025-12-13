@@ -29,8 +29,8 @@ public class AdminService {
     public Product approveProduct(Long id) {
         return productRepository.findById(id)
             .map(p -> {
-                p.setEcoCertified(true);   // <= ADMIN APPROVES
-                p.setEcoRequested(false);  // <= clear request
+                p.setEcoCertified(true);  
+                p.setEcoRequested(false);  
                 return productRepository.save(p);
             })
             .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -44,7 +44,6 @@ public class AdminService {
         user.setSellerRequestPending(false); 
         return userRepository.save(user);
     }
-
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
