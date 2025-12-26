@@ -26,7 +26,8 @@ public class DataLoader {
 				
 				System.out.println("Admin Created Successfully: admin@ecobazzar.com/Admin@123");
 			
-			}else {
+			}
+			else {
 				System.out.println("Admin user already exists");
 			}
 		};

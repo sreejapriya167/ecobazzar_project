@@ -32,6 +32,7 @@ public class AdminRequestController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Map<String, String> response = new HashMap<>();
+        
         try {
             service.requestAdminAccess(user.getId());
             response.put("message", "Admin access requested successfully");

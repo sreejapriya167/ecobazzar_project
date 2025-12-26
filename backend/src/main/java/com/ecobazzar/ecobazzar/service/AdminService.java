@@ -44,6 +44,7 @@ public class AdminService {
         user.setSellerRequestPending(false); 
         return userRepository.save(user);
     }
+    
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
